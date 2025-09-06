@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --page-max: 1200px; }
+
+body {
+  @apply bg-white text-black font-serif antialiased;
+}
+
+.container { @apply mx-auto px-6; max-width: var(--page-max); }
+.museum { @apply text-[17px] leading-8; }
+.h1 { @apply text-4xl tracking-tight mb-6; }
+.h2 { @apply text-2xl tracking-tight mb-4; }
+.caption { @apply text-sm text-neutral-600; }
+.grid-gap { @apply grid gap-8; }
+
+a { @apply underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-800; }
+button { @apply border border-neutral-300 rounded px-3 py-1.5 hover:bg-neutral-50; }
+hr { @apply my-10 border-neutral-200; }
