@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { sanityClient } from '@/lib/sanity.client'
 import { collectionBySlugQuery } from '@/lib/sanity.queries'
 import PortableTextBlock from '@/components/PortableTextBlock'
 import Grid from '@/components/Grid'
 import WorkCard from '@/components/WorkCard'
+
+export const revalidate = 60
 
 export default async function CollectionDetail({ params }: { params: { slug: string } }) {
   const col = await sanityClient.fetch(collectionBySlugQuery, { slug: params.slug })

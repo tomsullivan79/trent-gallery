@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { sanityClient } from '@/lib/sanity.client'
 import { workBySlugQuery } from '@/lib/sanity.queries'
 import { urlFor } from '@/lib/sanity.image'
@@ -5,6 +6,8 @@ import Image from 'next/image'
 import PortableTextBlock from '@/components/PortableTextBlock'
 import CopyLinkButton from '@/components/CopyLinkButton'
 import LikeButton from '@/components/LikeButton'
+
+export const revalidate = 60
 
 export default async function WorkDetail({ params }: { params: { slug: string } }) {
   const work = await sanityClient.fetch(workBySlugQuery, { slug: decodeURIComponent(params.slug) })
@@ -31,4 +34,19 @@ export default async function WorkDetail({ params }: { params: { slug: string } 
       </div>
     </article>
   )
+
+  export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+    const work = await sanityClient.fetch(workBySlugQuery, { slug: params.slug })
+    const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+    const title = work ? `${work.title} — Trent Gallery` : 'Work — Trent Gallery'
+    const og = work?.mainImage ? [{ url: urlFor(work.mainImage).width(1200).height(630).fit('crop').url() }] : []
+
+    return {
+      title,
+      openGraph: { title, url: `${base}/works/${params.slug}`, images: og },
+      twitter: { card: 'summary_large_image', title },
+    }
+  }
+
+
 }

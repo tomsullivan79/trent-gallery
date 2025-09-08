@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { sanityClient } from '@/lib/sanity.client'
 import { allCollectionsQuery } from '@/lib/sanity.queries'
 import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity.image'
+
+export const revalidate = 60
 
 export default async function HomePage() {
   const collections = await sanityClient.fetch(allCollectionsQuery)

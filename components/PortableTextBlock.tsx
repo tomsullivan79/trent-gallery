@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PortableText } from '@portabletext/react'
 
 export default function PortableTextBlock({ value }: { value: any }) {
