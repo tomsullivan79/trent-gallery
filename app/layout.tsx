@@ -1,6 +1,8 @@
 import '../styles/globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { Analytics } from '@vercel/analytics/react'
+
 
 export const metadata = {
   title: 'Watercolor Gallery',
@@ -14,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="container museum py-12">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   )
