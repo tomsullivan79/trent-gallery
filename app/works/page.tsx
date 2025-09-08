@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from 'next/link'
 import { sanityClient } from '@/lib/sanity.client'
 import { allWorksQuery, allTagsQuery } from '@/lib/sanity.queries'
