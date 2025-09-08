@@ -4,4 +4,3 @@ const nextConfig = {
   transpilePackages: ['sanity', '@sanity/vision', 'next-sanity', '@sanity/ui'],
 }
 export default nextConfig
-
