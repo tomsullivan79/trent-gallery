@@ -1,4 +1,8 @@
-export const allWorksQuery = `*[_type == "work"]|order(year desc, title asc){
+export const allTagsQuery = 'array::unique(*[_type == "work"].tags[])'
+
+export const allWorksQuery = `*[
+  _type == "work" && (!defined($tag) || $tag in tags)
+]|order(year desc, title asc){
   _id, title, "slug": slug.current, year, tags, mainImage, alt,
   "artistName": artist->name
 }`
