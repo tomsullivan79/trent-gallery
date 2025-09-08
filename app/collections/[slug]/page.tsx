@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { sanityClient } from '@/lib/sanity.client'
 import { collectionBySlugQuery } from '@/lib/sanity.queries'
 import PortableTextBlock from '@/components/PortableTextBlock'

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { sanityClient } from '@/lib/sanity.client'
 import { allCollectionsQuery } from '@/lib/sanity.queries'

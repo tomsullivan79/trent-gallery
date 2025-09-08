@@ -1,21 +1,42 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types'  // 👈 add
 
-export default function WorkCard({ work }: { work: any }) {
-  const img = work.mainImage
+type WorkListItem = {
+  _id: string
+  title: string
+  slug: string
+  year?: string
+  tags?: string[]
+  mainImage?: SanityImageSource | null    // 👈 tighten type
+  alt?: string
+  artistName?: string
+}
+
+export default function WorkCard({ work }: { work: WorkListItem }) {
+  const img = work.mainImage ?? null
   const src = img ? urlFor(img).width(800).height(600).fit('min').url() : ''
   return (
     <Link href={`/works/${work.slug}`} className="block no-underline">
-      {img && (
+      {img ? (
         <div className="aspect-[4/3] relative mb-3 bg-neutral-100">
-          <Image src={src} alt={work.alt || work.title} fill sizes="(max-width:768px) 100vw, 25vw" className="object-contain" />
+          <Image
+            src={src}
+            alt={work.alt || work.title}
+            fill
+            sizes="(max-width:768px) 100vw, 25vw"
+            className="object-contain"
+          />
         </div>
-      )}
+      ) : null}
       <div className="text-sm">
         <div className="font-semibold">{work.title}</div>
-        <div className="caption">{work.artistName}{work.year ? `, ${work.year}` : ''}</div>
+        <div className="caption">
+          {work.artistName}
+          {work.year ? `, ${work.year}` : ''}
+        </div>
       </div>
     </Link>
-  )}
+  )
+}
