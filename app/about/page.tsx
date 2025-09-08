@@ -4,6 +4,8 @@ import PortableTextBlock from '@/components/PortableTextBlock'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity.image'
 
+export const revalidate = 60
+
 export default async function AboutPage() {
   const artist = await sanityClient.fetch(artistDocQuery)
   if (!artist) return <div>Add an Artist doc in Studio.</div>

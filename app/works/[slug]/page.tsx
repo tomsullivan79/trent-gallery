@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { sanityClient } from '@/lib/sanity.client'
 import { workBySlugQuery } from '@/lib/sanity.queries'
 import { urlFor } from '@/lib/sanity.image'
@@ -10,9 +9,11 @@ import LikeButton from '@/components/LikeButton'
 export const revalidate = 60
 
 export default async function WorkDetail({ params }: { params: { slug: string } }) {
-  const work = await sanityClient.fetch(workBySlugQuery, { slug: decodeURIComponent(params.slug) })
+  const work = await sanityClient.fetch(workBySlugQuery, { slug: params.slug })
   if (!work) return <div>Not found</div>
+
   const src = work.mainImage ? urlFor(work.mainImage).width(2000).fit('max').url() : ''
+
   return (
     <article className="space-y-6">
       <div className="aspect-[4/3] relative bg-neutral-100">
@@ -23,7 +24,11 @@ export default async function WorkDetail({ params }: { params: { slug: string } 
 
       <header>
         <h1 className="h1">{work.title}</h1>
-        <p className="caption">{work.artist?.name}{work.year ? `, ${work.year}` : ''}{work.medium ? ` · ${work.medium}` : ''}</p>
+        <p className="caption">
+          {work.artist?.name}
+          {work.year ? `, ${work.year}` : ''}
+          {work.medium ? ` · ${work.medium}` : ''}
+        </p>
       </header>
 
       <PortableTextBlock value={work.description} />
@@ -34,19 +39,4 @@ export default async function WorkDetail({ params }: { params: { slug: string } 
       </div>
     </article>
   )
-
-  export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-    const work = await sanityClient.fetch(workBySlugQuery, { slug: params.slug })
-    const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-    const title = work ? `${work.title} — Trent Gallery` : 'Work — Trent Gallery'
-    const og = work?.mainImage ? [{ url: urlFor(work.mainImage).width(1200).height(630).fit('crop').url() }] : []
-
-    return {
-      title,
-      openGraph: { title, url: `${base}/works/${params.slug}`, images: og },
-      twitter: { card: 'summary_large_image', title },
-    }
-  }
-
-
 }
