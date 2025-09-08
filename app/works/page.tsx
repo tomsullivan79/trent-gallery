@@ -9,22 +9,18 @@ export const revalidate = 60
 
 export default async function WorksPage({
   searchParams,
-}: {
-  searchParams?: { tag?: string }
-}) {
-  // only use tag if it's a non-empty string
-  const tag =
-    typeof searchParams?.tag === 'string' && searchParams.tag.trim()
-      ? searchParams.tag
-      : undefined
+}: { searchParams?: { tag?: string } }) {
+  const raw = searchParams?.tag
+  const tag = typeof raw === 'string' && raw.trim() ? raw : undefined
 
-  // important: omit tag param entirely when undefined
-  const params: { tag?: string } = tag ? { tag } : {}
+  // ✅ Call fetch with 2 args only when tag exists
+  const worksPromise = tag
+    ? sanityClient.fetch(allWorksQuery, { tag })
+    : sanityClient.fetch(allWorksQuery)
 
-  const [works, tags] = await Promise.all([
-    sanityClient.fetch(allWorksQuery, params),
-    sanityClient.fetch(allTagsQuery),
-  ])
+  const tagsPromise = sanityClient.fetch(allTagsQuery)
+
+  const [works, tags] = await Promise.all([worksPromise, tagsPromise])
 
   return (
     <div>
@@ -32,12 +28,7 @@ export default async function WorksPage({
 
       {/* Tag chips */}
       <div className="flex flex-wrap gap-2 mb-6">
-        <Link
-          href="/works"
-          className={`px-3 py-1 rounded border ${!tag ? 'bg-black text-white' : ''}`}
-        >
-          All
-        </Link>
+        <Link href="/works" className={`px-3 py-1 rounded border ${!tag ? 'bg-black text-white' : ''}`}>All</Link>
         {tags?.map((t: string) => (
           <Link
             key={t}
