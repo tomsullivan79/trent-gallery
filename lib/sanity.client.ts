@@ -7,8 +7,9 @@ export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2025-01
 export const sanityClient = createClient({ projectId, dataset, apiVersion, useCdn: true })
 
 
-// Looser fetch to avoid TS overload issues with query params like `$tag`
-export const sfetch = <T = unknown>(
-  query: string,
-  params?: Record<string, unknown>
-) => (sanityClient as any).fetch<T>(query as any, params as any)
+type LooseFetch = <T = unknown>(q: string, p?: Record<string, unknown>) => Promise<T>
+type LooseClient = { fetch: LooseFetch }
+
+const looseClient = sanityClient as unknown as LooseClient
+
+export const sfetch: LooseFetch = (query, params) => looseClient.fetch(query, params)

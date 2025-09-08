@@ -2,14 +2,12 @@
 import Link from 'next/link'
 import Grid from '@/components/Grid'
 import WorkCard from '@/components/WorkCard'
-import { sfetch } from '@/lib/sanity.client'            // 👈 use the helper
+import { sfetch } from '@/lib/sanity.client'
 import { allTagsQuery, allWorksQuery } from '@/lib/sanity.queries'
 
 export const revalidate = 60
 
-export default async function WorksPage({
-  searchParams,
-}: { searchParams?: { tag?: string } }) {
+export default async function WorksPage({ searchParams }: { searchParams?: { tag?: string } }) {
   const raw = searchParams?.tag
   const tag = typeof raw === 'string' && raw.trim() ? raw : undefined
 
