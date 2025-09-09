@@ -9,16 +9,15 @@ export default function Header() {
     <header className="border-b border-neutral-200">
       <div className="container flex items-center justify-between py-5">
         <Link href="/" className="no-underline">
-          <span className="text-xl">Trent Gallery</span>
+          <span className="text-xl">Watercolor Gallery</span>
         </Link>
         <nav className="flex gap-6 text-sm">
           <Link href="/works">Works</Link>
           <Link href="/collections">Collections</Link>
           <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
           {studioEnabled && (
-            <Link href="/studio" className="text-neutral-500">
-              Studio
-            </Link>
+            <Link href="/studio" className="text-neutral-500">Studio</Link>
           )}
         </nav>
       </div>
