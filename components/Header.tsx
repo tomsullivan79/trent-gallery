@@ -9,7 +9,7 @@ export default function Header() {
     <header className="border-b border-neutral-200">
       <div className="container flex items-center justify-between py-5">
         <Link href="/" className="no-underline">
-          <span className="text-xl">Watercolor Gallery</span>
+          <span className="text-xl">Trent Gallery</span>
         </Link>
         <nav className="flex gap-6 text-sm">
           <Link href="/works">Works</Link>
