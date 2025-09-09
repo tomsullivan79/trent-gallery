@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { Suspense } from 'react'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 export const metadata = {
@@ -12,10 +13,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main className="container museum py-12">{children}</main>
-        <Footer />
+        {/* ...header, main, footer, etc... */}
+        {children}
+        <Suspense fallback={null}>
           <GoogleAnalytics />
+        </Suspense>
       </body>
     </html>
   )
