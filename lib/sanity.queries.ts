@@ -19,3 +19,7 @@ export const collectionBySlugQuery = `*[_type == "collection" && slug.current ==
 }`
 
 export const artistDocQuery = `*[_type == "artist"][0]{name, bio, headshot}`
+
+export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
+  siteTitle, siteDescription, heroImage, heroHeadline, heroSubhead
+}`
