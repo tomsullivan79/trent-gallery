@@ -1,17 +1,12 @@
-export const allTagsQuery = 'array::unique(*[_type == "work"].tags[])'
-
-export const allWorksQuery = `*[
-  _type == "work" && (!defined($tag) || $tag in tags)
-]|order(year desc, title asc){
+export const allWorksQuery = `*[_type == "work"]|order(year desc, title asc){
   _id, title, "slug": slug.current, year, tags, mainImage, alt,
   "artistName": artist->name
 }`
 
-export const workBySlugQuery = `*[_type == "work" && lower(slug.current) == lower($slug)][0]{
+export const workBySlugQuery = `*[_type == "work" && slug.current == $slug][0]{
   _id, title, year, medium, tags, description, mainImage, alt,
   "artist": artist->{name, bio, headshot}
 }`
-
 
 export const allCollectionsQuery = `*[_type == "collection"]|order(title asc){
   _id, title, intro, "slug": slug.current, heroImage,
