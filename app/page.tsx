@@ -1,20 +1,37 @@
-
 import { sanityClient } from '@/lib/sanity.client'
 import { allCollectionsQuery } from '@/lib/sanity.queries'
 import Link from 'next/link'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity.image'
 
-export const revalidate = 60
-
 export default async function HomePage() {
   const collections = await sanityClient.fetch(allCollectionsQuery)
+
   return (
     <div className="space-y-12">
+      {/* HERO */}
+      <section aria-label="Featured">
+        <div className="relative aspect-[16/9] bg-neutral-100 rounded-2xl overflow-hidden">
+          <Image
+            src="/hero.jpg"
+            alt="Watercolor painting"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        {/* Optional small tagline under the hero */}
+        {/* <p className="caption mt-2">Original watercolors by [Artist Name]</p> */}
+      </section>
+
+      {/* INTRO */}
       <section>
         <h1 className="h1">Watercolor Gallery</h1>
         <p>Minimal portfolio of works and curated collections.</p>
       </section>
+
+      {/* COLLECTIONS GRID */}
       <section>
         <h2 className="h2">Collections</h2>
         <div className="grid-gap grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -22,7 +39,12 @@ export default async function HomePage() {
             <Link key={c._id} href={`/collections/${c.slug}`} className="block no-underline">
               <div className="aspect-[4/3] relative mb-3 bg-neutral-100">
                 {c.heroImage && (
-                  <Image src={urlFor(c.heroImage).width(1200).height(900).fit('min').url()} alt={c.title} fill className="object-contain" />
+                  <Image
+                    src={urlFor(c.heroImage).width(1200).height(900).fit('min').url()}
+                    alt={c.title}
+                    fill
+                    className="object-contain"
+                  />
                 )}
               </div>
               <div className="text-sm">
