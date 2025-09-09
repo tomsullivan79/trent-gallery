@@ -19,7 +19,8 @@ if (!work) return notFound()
     <article className="space-y-6">
       <div className="aspect-[4/3] relative bg-neutral-100">
         {work.mainImage && (
-          <Image src={src} alt={work.alt || work.title} fill className="object-contain" />
+          <Image src={src} alt={work.alt || work.title} fill unoptimized
+  sizes="100vw" className="object-contain" />
         )}
       </div>
 
