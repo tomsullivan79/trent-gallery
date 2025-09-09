@@ -5,12 +5,13 @@ import Image from 'next/image'
 import PortableTextBlock from '@/components/PortableTextBlock'
 import CopyLinkButton from '@/components/CopyLinkButton'
 import LikeButton from '@/components/LikeButton'
+import { notFound } from 'next/navigation'
 
 export const revalidate = 60
 
 export default async function WorkDetail({ params }: { params: { slug: string } }) {
-  const work = await sanityClient.fetch(workBySlugQuery, { slug: params.slug })
-  if (!work) return <div>Not found</div>
+const work = await sanityClient.fetch(workBySlugQuery, { slug: params.slug })
+if (!work) return notFound()
 
   const src = work.mainImage ? urlFor(work.mainImage).width(2000).fit('max').url() : ''
 
