@@ -6,17 +6,6 @@ import { allTagsQuery, allWorksQuery } from '@/lib/sanity.queries'
 
 export const revalidate = 60
 
-type WorkListItem = {
-  _id: string
-  title: string
-  slug: string
-  year?: string
-  tags?: string[]
-  mainImage?: unknown
-  alt?: string
-  artistName?: string
-}
-
 export default async function WorksPage({
   searchParams,
 }: { searchParams?: { tag?: string } }) {
