@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/collections`,lastModified: new Date() },
     { url: `${base}/about`,      lastModified: new Date() },
     { url: `${base}/contact`, lastModified: new Date() },
+    { url: `${base}/newsletter`, lastModified: new Date() },
     // explicitly omit /studio from sitemap
   ]
 
