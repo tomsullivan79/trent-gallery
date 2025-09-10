@@ -2,7 +2,7 @@ import Script from 'next/script'
 
 export const metadata = {
   title: 'Newsletter — Trent Gallery',
-  description: 'Sign up to be notified about new watercolor works and collections.',
+  description: 'Sign up to be notified with occasional updates when new works or collections are published.',
 }
 
 export default function NewsletterPage() {
