@@ -6,8 +6,12 @@ import { Suspense } from 'react'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 export const metadata: Metadata = {
-  title: 'Watercolor Gallery',
-  description: 'Minimal watercolor portfolio of works and curated collections.',
+  title: {
+    default: 'Trent Gallery',
+    template: '%s — Trent Gallery',
+  },
+  description: 'Collected Watercolor, Charcoal, and Other Medium Works by Minnesota Arist Deborah Trent.',
+  // (optional but good)
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
 }
 

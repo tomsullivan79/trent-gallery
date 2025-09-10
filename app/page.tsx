@@ -7,6 +7,8 @@ import { urlFor } from '@/lib/sanity.image'
 
 export const revalidate = 60
 
+export const metadata: Metadata = { title: 'Trent Gallery — Artwork by Deborah Trent' }
+
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityClient.fetch(siteSettingsQuery)
   const title =
