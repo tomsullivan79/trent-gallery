@@ -6,8 +6,13 @@ export const metadata = {
 }
 
 export default function NewsletterPage() {
-  const account = process.env.NEXT_PUBLIC_MAILERLITE_ACCOUNT_ID
-  const formId = process.env.NEXT_PUBLIC_MAILERLITE_FORM_ID
+  const account =
+    process.env.NEXT_PUBLIC_MAILERLITE_ACCOUNT ||
+    process.env.NEXT_PUBLIC_MAILERLITE_ACCOUNT_ID
+
+  const formId =
+    process.env.NEXT_PUBLIC_MAILERLITE_FORM ||
+    process.env.NEXT_PUBLIC_MAILERLITE_FORM_ID
 
   if (!account || !formId) {
     return (
@@ -15,9 +20,9 @@ export default function NewsletterPage() {
         <h1 className="h1">Newsletter</h1>
         <p>
           Newsletter form is not configured yet. Add{' '}
-          <code>NEXT_PUBLIC_MAILERLITE_ACCOUNT_ID</code> and{' '}
-          <code>NEXT_PUBLIC_MAILERLITE_FORM_ID</code> in Vercel → Project → Settings → Environment Variables,
-          then redeploy.
+          <code>NEXT_PUBLIC_MAILERLITE_ACCOUNT</code> and{' '}
+          <code>NEXT_PUBLIC_MAILERLITE_FORM</code> (or the <code>..._ID</code> versions)
+          in Vercel → Project → Settings → Environment Variables, then redeploy.
         </p>
       </div>
     )
@@ -25,7 +30,6 @@ export default function NewsletterPage() {
 
   return (
     <div className="museum">
-      {/* Official MailerLite universal snippet (runs ml('account', ..., 'load')) */}
       <Script
         id="ml-universal"
         strategy="afterInteractive"
@@ -40,11 +44,8 @@ export default function NewsletterPage() {
           `,
         }}
       />
-
       <h1 className="h1">Newsletter</h1>
       <p className="mb-6">Get new works and collection updates by email.</p>
-
-      {/* Placeholder MailerLite looks for */}
       <div className="ml-embedded" data-form={formId} />
     </div>
   )
