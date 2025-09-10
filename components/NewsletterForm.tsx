@@ -30,7 +30,7 @@ export default function NewsletterForm() {
 
   return (
     <div className="space-y-3">
-      <p className="museum">Get new works and collection updates by email.</p>
+      <p className="museum">Get occasional updates from the artist when new works or curated collections are published. Unsubscribe anytime.</p>
       {/* MailerLite injects the form into this div */}
       <div className="ml-embedded" data-form={formId} />
     </div>
