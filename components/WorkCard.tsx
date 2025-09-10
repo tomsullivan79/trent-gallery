@@ -21,9 +21,7 @@ export default function WorkCard({ work }: { work: any }) {
       <div className="text-sm">
         <div className="font-semibold">{work.title}</div>
         <div className="caption">
-          {work.artistName}
-          {work.year ? `, ${work.year}` : ''}
-        </div>
+         {work.year ? work.year : ''}</div>
       </div>
     </Link>
   )
