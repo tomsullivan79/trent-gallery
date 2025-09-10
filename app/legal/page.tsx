@@ -36,7 +36,7 @@ export default function LegalPage() {
             The site is provided “as is” without warranties; we’re not liable
             for indirect or consequential damages to the extent permitted by law.
           </li>
-          <li>Governing law: Illinois, USA.</li>
+          <li>Governing law: Minnesota, USA.</li>
         </ul>
       </section>
 
